@@ -1,12 +1,10 @@
 version: 0.0
 os: linux
-
+files:
+  - source: /home/ubuntu/system-monitoring
+    destination: /home/ubuntu/system-monitoring
 hooks:
-  ApplicationStop:
-    - location: scripts/stop_container.sh
-      timeout: 300
-      runas: root
   AfterInstall:
-    - location: scripts/start_container.sh
+    - location: /home/ubuntu/system-monitoring/deploy.sh
       timeout: 300
-      runas: root
+      runas: ubuntu

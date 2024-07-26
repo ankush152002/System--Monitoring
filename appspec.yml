@@ -1,10 +1,8 @@
 version: 0.0
 os: linux
-files:
-  - source: /home/ubuntu/system-monitoring
-    destination: /home/ubuntu/system-monitoring
+
 hooks:
   AfterInstall:
-    - location: /home/ubuntu/system-monitoring/deploy.sh
+    - location: deploy.sh
       timeout: 300
-      runas: ubuntu
+      runas: root

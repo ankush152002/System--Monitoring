@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Docker...
+      - apt-get update -y
+      - apt-get install -y docker.io
+      - service docker start
+  pre_build:
+    commands:
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t ankush152002/monitoring-app .
+      - docker tag ankush152002/monitoring-app:latest ankush152002/monitoring-app:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push ankush152002/monitoring-app:latest
+
+artifacts:
+  files:
+    - '**/*'

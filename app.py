@@ -8,8 +8,8 @@ def index():
     cpu_metric = psutil.cpu_percent()
     mem_metric = psutil.virtual_memory().percent
     Message = None
-    if cpu_metric > 40 or mem_metric > 40:
-        Message = "High CPU or Memory Detected, scale up!!!"
+    if mem_metric > 40:
+        Message = "High Memory Usage Detected, scale up!!!"
     return render_template("index.html", cpu_metric=cpu_metric, mem_metric=mem_metric, message=Message)
 
 if __name__=='__main__':

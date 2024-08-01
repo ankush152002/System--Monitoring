@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: system-monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: system-monitoring
+  template:
+    metadata:
+      labels:
+        app: system-monitoring
+    spec:
+      containers:
+      - name: system-monitoring
+        image: system-monitoring:v1
+        ports:
+        - containerPort: 5000
+

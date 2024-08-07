@@ -16,8 +16,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - sudo docker build -t ankush152002/monitoring-app .
-      - sudo docker tag ankush152002/monitoring-app:latest ankush15/monitoring-app:latest
+      
   post_build:
     commands:
       - echo Build completed on `date`

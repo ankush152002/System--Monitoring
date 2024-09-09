@@ -4,10 +4,11 @@ metadata:
   name: system-monitoring-service
 spec:
   type: NodePort
-  ports:
-    - port: 5000
-      targetPort: 5000
-      nodePort: 30001
   selector:
-    app: system-monitoring
+    app: system-monitoring-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+    nodePort: 31000
 

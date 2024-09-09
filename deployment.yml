@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: system-monitoring
+  name: system-monitoring-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: system-monitoring
+      app: system-monitoring-app
   template:
     metadata:
       labels:
-        app: system-monitoring
+        app: system-monitoring-app
     spec:
       containers:
-      - name: system-monitoring
-        image: system-monitoring:v1
+      - name: system-monitoring-app
+        image: system-monitoring-app:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 5000
 

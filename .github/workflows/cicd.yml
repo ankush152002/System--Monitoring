@@ -32,7 +32,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/System--Monitoring:${{github.run_id}}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/system-monitoring-app:${{github.run_id}}
 
   update-newtag-in-helm-chart:
     runs-on: ubuntu-latest

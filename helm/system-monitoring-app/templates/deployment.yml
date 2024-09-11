@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: system-monitoring-app
-        image: system-monitoring-app:10809689606
+        image: system-monitoring-app:{{ .Values.image.tag }}
         ports:
         - containerPort: 5000
 

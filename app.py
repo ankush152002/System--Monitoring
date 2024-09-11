@@ -13,7 +13,7 @@ def metrics():
     mem_metric = psutil.virtual_memory().percent
     message = None
     if mem_metric > 40:
-        message = "High Memory Usage Detected"
+        message = "High Memory and CPU Usage Detected"
     return jsonify(cpu_metric=cpu_metric, mem_metric=mem_metric, message=message)
 
 if __name__ == '__main__':

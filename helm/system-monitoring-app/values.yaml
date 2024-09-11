@@ -8,7 +8,7 @@ image:
   repository: ankush152002/system-monitoring-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "10807078931"
+  tag: "10808338676"
 
 imagePullSecrets: []
 nameOverride: ""

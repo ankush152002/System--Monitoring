@@ -15,7 +15,6 @@ spec:
       containers:
       - name: system-monitoring-app
         image: system-monitoring-app:10809689606
-        imagePullPolicy: Never
         ports:
         - containerPort: 5000
 

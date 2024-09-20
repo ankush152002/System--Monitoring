@@ -14,19 +14,25 @@ spec:
     spec:
       containers:
       - name: system-monitoring-app
-        image: ankush152002/system-monitoring-app:10825486346  # Specify a specific version tag if possible
-        imagePullPolicy: IfNotPresent  # Change this if you want to pull the image if not present locally
+        image: ankush152002/system-monitoring-app:10825486346
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
         env:
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
-              name: db-config
-              key: DB_PORT
+              name: db-config        
+              key: DB_PORT           
         - name: DB_PASSPORT
           valueFrom:
             secretKeyRef:
-              name: db-secret
-              key: DB_PASSPORT
-        
+              name: db-secret        
+              key: DB_PASSPORT       
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /data  
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: gke-pvc

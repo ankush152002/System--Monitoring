@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: system-monitoring-app
-        image: system-monitoring-app:10825486346  # Specify a specific version tag if possible
+        image: ankush152002/system-monitoring-app:10825486346  # Specify a specific version tag if possible
         imagePullPolicy: IfNotPresent  # Change this if you want to pull the image if not present locally
         ports:
         - containerPort: 5000

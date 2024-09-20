@@ -18,3 +18,15 @@ spec:
         imagePullPolicy: IfNotPresent  # Change this if you want to pull the image if not present locally
         ports:
         - containerPort: 5000
+        env:
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: DB_PORT
+        - name: DB_PASSPORT
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSPORT
+        

@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: system-monitoring-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "gce"
 spec:
   rules:
   - host: 34.46.127.241

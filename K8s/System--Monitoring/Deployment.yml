@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: system-monitoring-app
 spec:
-  replicas: 10
+  replicas: 5
   selector:
     matchLabels:
       app: system-monitoring-app

@@ -4,7 +4,7 @@ options:
 steps:
   # Step 1: Pull the Docker image from Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['pull', 'docker.io/an/ankush152002/system-monitoring-app:latest']
+    args: ['pull', 'docker.io/an/ankush152002/system-monitoring-app:13178729011']
 
   # Step 2: Run SonarQube scan
   - name: 'sonarsource/sonar-scanner-cli'

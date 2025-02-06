@@ -3,6 +3,8 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['pull', 'docker.io/an/ankush152002/system-monitoring-app:latest']
 
+options:
+  logging: NONE
 
   # Step 3: Run SonarQube scan (assuming SonarQube server is already set up)
   - name: 'sonarsource/sonar-scanner-cli'

@@ -23,5 +23,5 @@ steps:
 # Secret manager for SonarQube token
 availableSecrets:
   secretManager:
-    - versionName: projects/cloudbuild-450108/secrets/sonar-token/versions/latest
+    - versionName: projects/906367866358/secrets/sonar-token
       env: 'SONAR_TOKEN'

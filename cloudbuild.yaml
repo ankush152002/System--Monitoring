@@ -1,5 +1,5 @@
 options:
-  logging: NONE  # No logging bucket
+  logging: CLOUD_LOGGING_ONLY # No logging bucket
 
 steps:
   # Step 1: Pull the Docker image from Docker Hub
@@ -30,4 +30,4 @@ substitutions:
   _SONAR_TOKEN: 'sqp_a2de61de7b7df8d04775a320c152068e73a4c05c'
 
 options:
-  logging: NONE  # Disable default logging, adjust as needed
+  logging: CLOUD_LOGGING_ONLY  # Disable default logging, adjust as needed

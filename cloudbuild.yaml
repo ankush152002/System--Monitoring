@@ -2,13 +2,13 @@ options:
   logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging for debugging
 
 steps:
-  # Step 1: Authenticate to Docker Hub using Secret Manager
+  # Step 1: Authenticate to Docker Hub using substitutions for credentials
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        echo "$_DOCKER_PASSWORD" | docker login -u "$_DOCKER_USERNAME" --password-stdin
         docker pull docker.io/ankush152002/system-monitoring-app:13178729011
 
   # Step 2: Run SonarQube scan
@@ -28,14 +28,11 @@ steps:
       - 'push'
       - 'docker.io/ankush152002/system-monitoring-app:latest'
 
-# Substitutions (for the SonarQube token)
+# Substitutions (for Docker and SonarQube credentials)
 substitutions:
-  _SONAR_TOKEN: 'sqp_a2de61de7b7df8d04775a320c152068e73a4c05c'
+  _DOCKER_USERNAME: 'ankush152002'
+  _DOCKER_PASSWORD: 'dckr_pat_e3_gG4EVM4aFmkKkeAXj14if9Dk'
+  _SONAR_TOKEN: 'sqa_0b47cdd93521d0a8572ac7fa028793448dac9b57'
 
-# Use Secret Manager to provide sensitive values
-availableSecrets:
-  secretManager:
-    - versionName: projects/906367866358/secrets/DOCKER_USERNAME/versions/1
-      env: 'DOCKER_USERNAME'
-    - versionName: projects/906367866358/secrets/DOCKER_TOKEN/versions/1
-      env: 'DOCKER_TOKEN'
+options:
+  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging for debugging

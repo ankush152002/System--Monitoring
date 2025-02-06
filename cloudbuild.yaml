@@ -1,0 +1,29 @@
+steps:
+  # Step 1: Pull the Docker image from Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['pull', 'docker.io/an/ankush152002/system-monitoring-app:latest']
+
+
+  # Step 3: Run SonarQube scan (assuming SonarQube server is already set up)
+  - name: 'sonarsource/sonar-scanner-cli'
+    secretEnv: ['SONAR_TOKEN']
+    args:
+      - 'sonar-scanner'
+      - '-Dsonar.projectKey=cloudbuild123'
+      - '-Dsonar.sources=src'
+      - '-Dsonar.host.url=http://http://34.42.227.155/:9000'
+      - '-Dsonar.login=$sqa_0b47cdd93521d0a8572ac7fa028793448dac9b57'
+
+  # Step 4: Push the Docker image back to Docker Hub (only if successful)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'docker.io/ankush152002/system-monitoring-app:latest']
+
+# Optional: Define the image to push to Docker Hub
+images:
+  - 'docker.io/ankush152002/system-monitoring-app:latest'
+
+# Secret manager for SonarQube token
+availableSecrets:
+  secretManager:
+    - versionName: projects/cloudbuild-450108/secrets/sonar-token/versions/latest
+      env: 'SONAR_TOKEN'

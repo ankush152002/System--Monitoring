@@ -27,7 +27,7 @@ steps:
 
 # Substitutions (for the SonarQube token)
 substitutions:
-  _SONAR_TOKEN: 'sqa_0b47cdd93521d0a8572ac7fa028793448dac9b57'
+  _SONAR_TOKEN: 'sqp_a2de61de7b7df8d04775a320c152068e73a4c05c'
 
 options:
   logging: NONE  # Disable default logging, adjust as needed

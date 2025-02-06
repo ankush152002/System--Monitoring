@@ -1,25 +1,24 @@
+options:
+  logging: NONE  # No logging bucket
+
 steps:
   # Step 1: Pull the Docker image from Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
     args: ['pull', 'docker.io/an/ankush152002/system-monitoring-app:latest']
 
-options:
-  logging: NONE
-
-  # Step 3: Run SonarQube scan (assuming SonarQube server is already set up)
+  # Step 2: Run SonarQube scan (assuming SonarQube server is already set up)
   - name: 'sonarsource/sonar-scanner-cli'
     secretEnv: ['SONAR_TOKEN']
     args:
       - 'sonar-scanner'
       - '-Dsonar.projectKey=cloudbuild123'
       - '-Dsonar.sources=src'
-      - '-Dsonar.host.url=http://http://34.42.227.155/:9000'
-      - '-Dsonar.login=$sqa_0b47cdd93521d0a8572ac7fa028793448dac9b57'
+      - '-Dsonar.host.url=http://34.42.227.155:9000'  # Removed duplicate http://
+      - '-Dsonar.login=$SONAR_TOKEN'  # Corrected to use secret variable
 
-  # Step 4: Push the Docker image back to Docker Hub (only if successful)
+  # Step 3: Push the Docker image back to Docker Hub (only if successful)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'docker.io/ankush152002/system-monitoring-app:latest']
-  
 
 # Secret manager for SonarQube token
 availableSecrets:

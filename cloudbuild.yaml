@@ -32,9 +32,9 @@ substitutions:
 availableSecrets:
   secretManager:
     - versionName: projects/cloudbuild-450108/secrets/docker-username/versions/latest
-      env: '_DOCKER_USERNAME'
+      env: 'DOCKER_USERNAME'
     - versionName: projects/cloudbuild-450108/secrets/docker-password/versions/latest
-      env: '_DOCKER_PASSWORD'
+      env: 'DOCKER_PASSWORD'
 
 
 options:

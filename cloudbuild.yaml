@@ -9,7 +9,7 @@ steps:
       - '-c'
       - |
         echo "$_DOCKER_PASSWORD" | docker login -u "$_DOCKER_USERNAME" --password-stdin
-        docker pull docker.io/ankush152002/system-monitoring-app:latest
+        docker pull docker.io/ankush152002/system-monitoring-app:10960874397
 
   # Step 2: Run SonarQube scan
   - name: 'sonarsource/sonar-scanner-cli'

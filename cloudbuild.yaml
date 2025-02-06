@@ -28,6 +28,13 @@ steps:
 # Substitutions (for the SonarQube token)
 substitutions:
   _SONAR_TOKEN: 'sqp_a2de61de7b7df8d04775a320c152068e73a4c05c'
+  
+availableSecrets:
+  secretManager:
+    - versionName: projects/cloudbuild-450108/secrets/docker-username/versions/latest
+      env: '_DOCKER_USERNAME'
+    - versionName: projects/cloudbuild-450108/secrets/docker-password/versions/latest
+      env: '_DOCKER_PASSWORD'
 
 
 options:

@@ -18,7 +18,7 @@ steps:
     args:
       - 'sonar-scanner'
       - '-Dsonar.projectKey=cloudbuild123'
-      - '-Dsonar.sources=src'
+      - '-Dsonar.sources=scripts'
       - '-Dsonar.host.url=http://34.42.227.155:9000'
       - '-Dsonar.login=${_SONAR_TOKEN}'
 

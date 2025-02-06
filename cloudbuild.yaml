@@ -17,10 +17,7 @@ steps:
   # Step 4: Push the Docker image back to Docker Hub (only if successful)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'docker.io/ankush152002/system-monitoring-app:latest']
-
-# Optional: Define the image to push to Docker Hub
-images:
-  - 'docker.io/ankush152002/system-monitoring-app:latest'
+  
 
 # Secret manager for SonarQube token
 availableSecrets:

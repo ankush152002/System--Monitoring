@@ -35,7 +35,7 @@ substitutions:
 # Use Secret Manager to provide sensitive values
 availableSecrets:
   secretManager:
-    - versionName: projects/906367866358/secrets/DOCKER_USERNAME/versions/latest
+    - versionName: projects/906367866358/secrets/DOCKER_USERNAME/versions/1
       env: 'DOCKER_USERNAME'
-    - versionName: projects/906367866358/secrets/DOCKER_TOKEN/versions/latest
+    - versionName: projects/906367866358/secrets/DOCKER_TOKEN/versions/1
       env: 'DOCKER_TOKEN'

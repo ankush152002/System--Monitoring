@@ -8,7 +8,7 @@ steps:
     args:
       - '-c'
       - |
-        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
         docker pull docker.io/ankush152002/system-monitoring-app:13178729011
 
   # Step 2: Run SonarQube scan
@@ -37,5 +37,5 @@ availableSecrets:
   secretManager:
     - versionName: projects/906367866358/secrets/DOCKER_USERNAME/versions/latest
       env: 'DOCKER_USERNAME'
-    - versionName: projects/906367866358/secrets/DOCKER_PASSWORD/versions/latest
-      env: 'DOCKER_PASSWORD'
+    - versionName: projects/906367866358/secrets/DOCKER_TOKEN/versions/latest
+      env: 'DOCKER_TOKEN'

@@ -9,8 +9,7 @@ steps:
       - '-c'
       - |
         echo "$_DOCKER_PASSWORD" | docker login -u "$_DOCKER_USERNAME" --password-stdin
-        docker pull docker.io/ankush152002/system-monitoring-app@sha256:af1f3176995609bdec7d02fa39d82196a03e7c00a79bc03f3511b1c8d3f6ed09
-
+        docker pull docker.io/ankush152002/system-monitoring-app@sha256:959a50e52de236d66fbcbbc241c36b61891cbe666e240daf129e72e32804fc8b
   # Step 3: Sign the image with Binary Authorization (Optional, if required)
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -19,7 +18,7 @@ steps:
       - 'binauthz'
       - 'attestations'
       - 'sign-and-create'
-      - '--artifact-url=docker.io/ankush152002/system-monitoring-app@sha256:af1f3176995609bdec7d02fa39d82196a03e7c00a79bc03f3511b1c8d3f6ed09'
+      - '--artifact-url=docker.io/ankush152002/system-monitoring-app@sha256:959a50e52de236d66fbcbbc241c36b61891cbe666e240daf129e72e32804fc8b'
       - '--attestor=anilk'  # Replace with your attestor name
       - '--attestor-project=cloudbuild-450108'  # Replace with your project ID
       - '--keyversion=projects/cloudbuild-450108/locations/global/keyRings/binaryauthorization-keys/cryptoKeys/demo-key/cryptoKeyVersions/1'
@@ -32,14 +31,14 @@ steps:
       - 'binauthz'
       - 'attestations'
       - 'list'
-      - '--artifact-url=docker.io/ankush152002/system-monitoring-app@sha256:af1f3176995609bdec7d02fa39d82196a03e7c00a79bc03f3511b1c8d3f6ed09'
+      - '--artifact-url=docker.io/ankush152002/system-monitoring-app@sha256:959a50e52de236d66fbcbbc241c36b61891cbe666e240daf129e72e32804fc8b'
 
   # Step 5: Deploy to GKE (if verification is successful)
   - name: 'gcr.io/cloud-builders/gke-deploy'
     args:
       - 'run'
       - '--filename=deployment.yml'
-      - '--image=docker.io/ankush152002/system-monitoring-app@sha256:af1f3176995609bdec7d02fa39d82196a03e7c00a79bc03f3511b1c8d3f6ed09'
+      - '--image=docker.io/ankush152002/system-monitoring-app@sha256:959a50e52de236d66fbcbbc241c36b61891cbe666e240daf129e72e32804fc8b'
       - '--cluster=sonar-cluster'
       - '--location=us-central1-a'
 

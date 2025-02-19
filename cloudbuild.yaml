@@ -1,34 +1,51 @@
 options:
-  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging for debugging
+  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging for debugging
 
 steps:
-  # Step 1: Authenticate to Docker Hub using substitutions for credentials
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        echo "$_DOCKER_PASSWORD" | docker login -u "$_DOCKER_USERNAME" --password-stdin
-        docker pull docker.io/ankush152002/system-monitoring-app:10960874397
-
-  # Step 2: Run SonarQube scan
-  - name: 'sonarsource/sonar-scanner-cli'
-    env:
-      - 'SONAR_TOKEN=${_SONAR_TOKEN}'  # Pass SonarQube token as environment variable
-    args:
-      - 'sonar-scanner'
-      - '-Dsonar.projectKey=cloudbuild123'
-      - '-Dsonar.sources=.'
-      - '-Dsonar.host.url=http://34.42.227.155:9000'
-      - '-Dsonar.login=${_SONAR_TOKEN}'
+  # Step 1: Authenticate to Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "$_DOCKER_PASSWORD" | docker login -u "$_DOCKER_USERNAME" --password-stdin
+        docker pull docker.io/ankush152002/system-monitoring-app:10960874397
 
 
+  # Step 3: Sign the image with Binary Authorization (Optional, if required)
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'beta'
+      - 'container'
+      - 'binauthz'
+      - 'attestations'
+      - 'sign-and-create'
+      - '--artifact-url=docker.io/ankush152002/system-monitoring-app:10960874397'
+      - '--attestor=anilk'  # Replace with your attestor name
+      - '--attestor-project=cloudbuild-450108'  # Replace with your project ID
+      - '--keyversion=projects/cloudbuild-450108/locations/global/keyRings/binaryauthorization-keys/cryptoKeys/demo-key/cryptoKeyVersions/1' 
 
-# Substitutions (for Docker and SonarQube credentials)
-substitutions:
-  _DOCKER_USERNAME: 'ankush152002'
-  _DOCKER_PASSWORD: 'dckr_pat_e3_gG4EVM4aFmkKkeAXj14if9Dk'
-  _SONAR_TOKEN: 'sqa_0b47cdd93521d0a8572ac7fa028793448dac9b57'
+  # Step 4: Verify image with Binary Authorization before deployment
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'beta'
+      - 'container'
+      - 'binauthz'
+      - 'attestations'
+      - 'list'
+      - '--artifact-url=docker.io/ankush152002/system-monitoring-app:10960874397'
+
+  # Step 5: Deploy to GKE (if verification is successful)
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    args:
+      - 'run'
+      - '--filename=deployment.yaml'
+      - '--image=docker.io/ankush152002/system-monitoring-app:10960874397'
+      - '--cluster=my-gke-cluster'
+      - '--location=us-central1'
+
 
 options:
-  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging for debugging
+  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging for debugging
+
+

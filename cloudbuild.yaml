@@ -9,7 +9,7 @@ steps:
       - '-c'
       - |
         echo "$_DOCKER_PASSWORD" | docker login -u "$_DOCKER_USERNAME" --password-stdin
-        docker pull docker.io/ankush152002/system-monitoring-app:10960874397
+        docker pull docker.io/ankush152002/system-monitoring-app@sha256:5648ce068d3245aaae9d2fcece69805c0abdd9b203e896d59e8e5b83060bab10
 
   # Step 3: Sign the image with Binary Authorization (Optional, if required)
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -19,10 +19,10 @@ steps:
       - 'binauthz'
       - 'attestations'
       - 'sign-and-create'
-      - '--artifact-url=docker.io/ankush152002/system-monitoring-app:10960874397'
+      - '--artifact-url=docker.io/ankush152002/system-monitoring-app@sha256:5648ce068d3245aaae9d2fcece69805c0abdd9b203e896d59e8e5b83060bab10'
       - '--attestor=anilk'  # Replace with your attestor name
       - '--attestor-project=cloudbuild-450108'  # Replace with your project ID
-      - '--keyversion=projects/cloudbuild-450108/locations/global/keyRings/binaryauthorization-keys/cryptoKeys/demo-key/cryptoKeyVersions/1' 
+      - '--keyversion=projects/cloudbuild-450108/locations/global/keyRings/binaryauthorization-keys/cryptoKeys/demo-key/cryptoKeyVersions/1'
 
   # Step 4: Verify image with Binary Authorization before deployment
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -32,15 +32,16 @@ steps:
       - 'binauthz'
       - 'attestations'
       - 'list'
-      - '--artifact-url=docker.io/ankush152002/system-monitoring-app:10960874397'
+      - '--artifact-url=docker.io/ankush152002/system-monitoring-app@sha256:5648ce068d3245aaae9d2fcece69805c0abdd9b203e896d59e8e5b83060bab10'
 
   # Step 5: Deploy to GKE (if verification is successful)
   - name: 'gcr.io/cloud-builders/gke-deploy'
     args:
       - 'run'
       - '--filename=deployment.yaml'
-      - '--image=docker.io/ankush152002/system-monitoring-app:10960874397'
+      - '--image=docker.io/ankush152002/system-monitoring-app@sha256:5648ce068d3245aaae9d2fcece69805c0abdd9b203e896d59e8e5b83060bab10'
       - '--cluster=sonar-cluster'
       - '--location=us-central1-a'
+
 options:
   logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging for debugging

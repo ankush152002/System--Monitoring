@@ -44,4 +44,4 @@ steps:
       - '--location=us-central1-a'
 
 options:
-  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging
+  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Log

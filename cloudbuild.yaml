@@ -38,7 +38,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gke-deploy'
     args:
       - 'run'
-      - '--filename=deployment.yaml'
+      - '--filename=deployment.yml'
       - '--image=docker.io/ankush152002/system-monitoring-app@sha256:5648ce068d3245aaae9d2fcece69805c0abdd9b203e896d59e8e5b83060bab10'
       - '--cluster=sonar-cluster'
       - '--location=us-central1-a'
